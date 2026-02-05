@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dearest Love</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #ffe6f2;
+            overflow-x: hidden;
+            /* allow vertical scroll */
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #e60073;
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 1.8rem;
+            padding: 15px 30px;
+            margin: 20px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #question {
+            font-size: 2.4rem;
+            /* Bigger text */
+            color: #cc1451;
+            /* A romantic dark pink/red */
+            font-weight: bold;
+            /* Make it stand out */
+            margin-top: 20px;
+            /* Space above */
+            margin-bottom: 10px;
+            /* Space below */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            /* Soft shadow */
+        }
+
+        #yesBtn {
+            background: #ff4da6;
+            color: white;
+        }
+
+        #noBtn {
+            background: #888;
+            color: white;
+            position: absolute;
+        }
+
+        .photo {
+            width: 200px;
+            margin: 15px;
+            border-radius: 15px;
+            display: none;
+            /* hidden until yes click */
+        }
+
+        #message {
+            font-size: 2.5rem;
+            color: #d1006c;
+            margin-top: 40px;
+            display: none;
+            /* hidden until yes click */
+        }
+
+        /* 💗 Sticky footer at bottom */
+        footer {
+            font-size: 1rem;
+            color: #555;
+            padding: 15px 0;
+            border-top: 1px solid #ddd;
+            width: 100%;
+            background: #fff8fa;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="title">My Dearest Love ❤️</h1>
+    <div id="question"> I've prepared something special for you, Can you please answer? </div>
+
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 💔</button>
+
+    <!-- Sounds -->
+    <audio id="crackerSound" src="cracker.mp3"></audio>
+    <audio id="loveSong" src="love-song.mp3"></audio>
+    <audio id="noSong" src="no-song.mp3"></audio>
+
+    <!-- Canvas Confetti script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const title = document.getElementById("title");
+        const question = document.getElementById("question");
+
+        const cracker = document.getElementById("crackerSound");
+        const loveSong = document.getElementById("loveSong");
+        const noSong = document.getElementById("noSong");
+
+        // Confetti
+        function showConfetti() {
+            confetti({
+                particleCount: 200,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+       yesBtn.addEventListener("click", () => {
+    // Stop any no-click sound that might be playing
+    noSong.pause();
+    noSong.currentTime = 0;
+
+    // Now play the cracker sound
+    cracker.play();
+
+    // Remove question and buttons
+    question.remove();
+    yesBtn.remove();
+    noBtn.remove();
+
+    // Show love message
+    message.style.display = "block";
+    message.textContent = "Today I want to remind you that I am grateful to have you in my life. Never forget that you are the best thing that ever happened to me. And you are and will always be my favorite person in the world........💐❤️";
+
+    // Show photos
+    const photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg"];
+    photos.forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = "My Love Photo";
+        img.className = "photo";
+        img.style.display = "inline-block";
+        document.body.appendChild(img);
+    });
+
+    // Play love song
+    loveSong.play();
+
+    // Confetti
+    showConfetti();
+    setInterval(showConfetti, 1200);
+});
+
+
+        noBtn.addEventListener("click", () => {
+            noSong.play();
+            const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        });
+        noSong.pause();
+        noSong.currentTime = 0;
+
+
+    </script>
+
+    </script>
+
+    <div id="message">
+        Today I want to remind you that I am grateful to have you in my life. Never forget that you are the best thing that ever happened to me. And you are and will always be my favorite person in the world💐❤️
+    </div>
+
+</body>
+<footer>
+    🌸 All rights reserved by Anil in your heart from 2025 to till Forever ❤️
+</footer>
+
+</html>
